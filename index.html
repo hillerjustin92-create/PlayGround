@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <script>document.documentElement.dataset.js = "1";</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AnyClaw — Deine lokalen Agenten, überall</title>
+  <meta name="description" content="AnyClaw bringt OpenClaw, Codex CLI und Claude Code auf dein Smartphone. Drei KI-Coding-Agenten, ein vollständiges Linux-Terminal und dein Repo — auf Android, ohne Root und ohne PC." />
+  <meta name="theme-color" content="#05060a" />
+  <meta property="og:title" content="AnyClaw — Deine lokalen Agenten, überall" />
+  <meta property="og:description" content="Drei KI-Coding-Agenten und ein vollständiges Linux-Terminal in einer Android-APK. Kein Root. Kein Server. Kein PC." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-claw" viewBox="0 0 32 32">
+      <path fill="currentColor" stroke="none" d="M4.4 20.1C4.4 10.2 11.6 3 21 3c4.3 0 8 1.4 10.7 3.9l-3.9 3.9A10.2 10.2 0 0 0 21 8.3 9.7 9.7 0 0 0 11.3 18c0 2.2.8 4.3 2.2 5.9l-3.8 3.8a14.6 14.6 0 0 1-5.3-7.6Z"/>
+      <path fill="currentColor" stroke="none" d="M27.4 13.4l-4.5 4.5a5.8 5.8 0 0 1-5.6 6.9v5.2a14.4 14.4 0 0 0 9.5-4.2 14.3 14.3 0 0 0 4.2-10.2c0-.8 0-1.5-.2-2.2l-3.4 .1Z"/>
+    </symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="m6.5 9 3 3-3 3M13 15h4.5"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="8" y="8" width="8" height="8" rx="1.5"/><path d="M8 2v2M12 2v2M16 2v2M8 20v2M12 20v2M16 20v2M2 8h2M2 12h2M2 16h2M20 8h2M20 12h2M20 16h2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 20 6v6c0 4.5-3.2 7.8-8 9.2-4.8-1.4-8-4.7-8-9.2V6l8-3.2Z"/><path d="m8.7 11.8 2.2 2.2 4.4-4.5"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 10.5v3"/><path d="M5.5 10.5h5v3h-5z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 4 5.8 4 9.2s-1.4 6.6-4 9.2c-2.6-2.6-4-5.8-4-9.2s1.4-6.6 4-9.2Z"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4.2"/><path d="m11 12 9-9M16.5 6.5 19 9M14 9l2.5 2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 5.5v-1a2 2 0 0 0-2-2h-9a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h1"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12 8 5.2Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17 4.8 18 5.1 18 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5 13.7 9l6.5 1.7-6.5 1.7L12 19l-1.7-6.6L3.8 10.7 10.3 9 12 2.5Z"/></symbol>
+  </svg>
+
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="AnyClaw Startseite">
+        <span class="brand-mark"><svg><use href="#i-claw"/></svg></span>
+        <span class="brand-name">AnyClaw</span>
+        <span class="brand-ver">v2</span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Hauptnavigation">
+        <a href="#agents">Agenten</a>
+        <a href="#route">Router</a>
+        <a href="#runtime">Runtime</a>
+        <a href="#install">Installieren</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="icon-btn" href="https://github.com/OpenClawAndroid/openclaw-android-assistant" target="_blank" rel="noreferrer noopener" aria-label="GitHub-Repository">
+          <svg><use href="#i-github"/></svg>
+        </a>
+        <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant" target="_blank" rel="noreferrer noopener">
+          <svg><use href="#i-play"/></svg> APK holen
+        </a>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menü umschalten" aria-expanded="false" aria-controls="navLinks">
+          <svg class="menu-icon"><use href="#i-menu"/></svg>
+          <svg class="close-icon"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><span class="pulse"></span> OpenClaw · Codex · Claude Code <span class="sep">/</span> Android</p>
+        <h1 class="reveal delay-1">Dein ganzer<br />Dev-Stack.<br /><span class="grad">In einer Klaue.</span></h1>
+        <p class="lede reveal delay-2">Drei KI-Coding-Agenten, ein vollständiges Linux-Terminal und dein Repo — auf deinem Smartphone. Kein Root. Kein PC. Keine Cloud-Leine.</p>
+        <div class="hero-cta reveal delay-3">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant" target="_blank" rel="noreferrer noopener">
+            Für Android laden <svg><use href="#i-arrow"/></svg>
+          </a>
+          <button class="btn btn-ghost" id="tryTerminal" type="button">
+            <svg><use href="#i-terminal"/></svg> Terminal testen
+          </button>
+        </div>
+        <dl class="hero-stats reveal delay-4">
+          <div><dt>3</dt><dd>Agenten</dd></div>
+          <div><dt>0</dt><dd>Root nötig</dd></div>
+          <div><dt>1</dt><dd>APK</dd></div>
+          <div><dt>24/7</dt><dd>Hintergrund</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-term reveal delay-2">
+        <div class="terminal" id="terminal">
+          <div class="term-bar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">web@anyclaw — zsh — 84×24</span>
+            <span class="term-live"><span class="pulse"></span> aktiv</span>
+          </div>
+          <div class="term-body" id="termBody" role="log" aria-live="polite" aria-label="Interaktives AnyClaw-Terminal">
+            <div id="termOut" class="term-out"></div>
+            <form id="termForm" class="term-line term-form" autocomplete="off">
+              <label class="sr-only" for="termInput">Terminal-Befehl</label>
+              <span class="prompt" aria-hidden="true">web@anyclaw:~$</span>
+              <input id="termInput" name="command" type="text" spellcheck="false" autocapitalize="none" autocomplete="off" autocorrect="off" enterkeyhint="go" placeholder="befehl eingeben" />
+            </form>
+          </div>
+          <div class="term-chips" id="termChips" aria-label="Vorgeschlagene Befehle">
+            <span class="chips-label">teste</span>
+            <button type="button" data-cmd="help">/help</button>
+            <button type="button" data-cmd="agents">/agents</button>
+            <button type="button" data-cmd="guest">/guest</button>
+            <button type="button" data-cmd="run landingpage bauen">/run landingpage</button>
+            <button type="button" data-cmd="clear">/clear</button>
+          </div>
+        </div>
+        <p class="term-note"><svg><use href="#i-key"/></svg> Tippe <b>/guest</b> für einen Demo-ClawKey · <span class="kbd">↑</span> Verlauf · <span class="kbd">tab</span> vervollständigen</p>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>OpenClaw 2026.9.9</span><span class="dot">◆</span>
+        <span>Codex CLI 0.104.0</span><span class="dot">◆</span>
+        <span>Claude Code</span><span class="dot">◆</span>
+        <span>Node.js 24</span><span class="dot">◆</span>
+        <span>Termux-Userland</span><span class="dot">◆</span>
+        <span>aarch64 · Rust</span><span class="dot">◆</span>
+        <span>MCP bereit</span><span class="dot">◆</span>
+        <span>OpenClaw 2026.9.9</span><span class="dot">◆</span>
+        <span>Codex CLI 0.104.0</span><span class="dot">◆</span>
+        <span>Claude Code</span><span class="dot">◆</span>
+        <span>Node.js 24</span><span class="dot">◆</span>
+        <span>Termux-Userland</span><span class="dot">◆</span>
+        <span>aarch64 · Rust</span><span class="dot">◆</span>
+        <span>MCP bereit</span><span class="dot">◆</span>
+      </div>
+    </div>
+
+    <section class="section container" id="agents">
+      <div class="section-head reveal">
+        <p class="kicker">Die Crew</p>
+        <h2>Drei Agenten. <span class="grad">Ein Prompt.</span></h2>
+        <p class="section-sub">Jede Klaue hat ihre Spezialität. AnyClaw routet die Aufgabe, teilt den Kontext und hält jede Session im Hintergrund am Leben.</p>
+      </div>
+
+      <div class="agent-grid">
+        <article class="agent-card reveal" data-agent="openclaw" style="--accent:#ff7a3d">
+          <div class="agent-top">
+            <span class="agent-icon"><svg><use href="#i-globe"/></svg></span>
+            <span class="status"><span class="pulse"></span> online</span>
+          </div>
+          <h3>OpenClaw</h3>
+          <p class="agent-role">Persönliches KI-Gateway</p>
+          <p class="agent-desc">Chat, Multi-Agent-Routing, Skills, Sessions und Canvas. Der Control Room, der alle Kanäle synchron hält.</p>
+          <ul class="agent-points">
+            <li>Multi-Channel-Posteingang</li>
+            <li>Skills &amp; Agent-Routing</li>
+            <li>Canvas + Control UI</li>
+          </ul>
+          <div class="agent-foot"><code>2026.9.9</code><span>Gateway</span></div>
+        </article>
+
+        <article class="agent-card reveal delay-1" data-agent="codex" style="--accent:#5fe3ff">
+          <div class="agent-top">
+            <span class="agent-icon"><svg><use href="#i-terminal"/></svg></span>
+            <span class="status"><span class="pulse"></span> online</span>
+          </div>
+          <h3>Codex CLI</h3>
+          <p class="agent-role">Terminal-Coding-Agent</p>
+          <p class="agent-desc">Liest das Repo, schreibt die Dateien, führt die Befehle aus. Konversationelles Coden mit Streaming-Reasoning und Multi-Thread-Sessions.</p>
+          <ul class="agent-points">
+            <li>gpt-5.3-codex via OAuth</li>
+            <li>Repo-weite Edits</li>
+            <li>Nativer Rust-Core</li>
+          </ul>
+          <div class="agent-foot"><code>0.104.0</code><span>Terminal</span></div>
+        </article>
+
+        <article class="agent-card reveal delay-2" data-agent="claude" style="--accent:#b69cff">
+          <div class="agent-top">
+            <span class="agent-icon"><svg><use href="#i-layers"/></svg></span>
+            <span class="status standby"><span class="pulse"></span> bereit</span>
+          </div>
+          <h3>Claude Code</h3>
+          <p class="agent-role">Claw Code / OpenClaude</p>
+          <p class="agent-desc">Die Claude-Code-Architektur im Taschenformat. 19 Tools, eine Query-Engine, MCP-Transports und Multi-Agent-Swarms.</p>
+          <ul class="agent-points">
+            <li>19 integrierte Tools</li>
+            <li>MCP · 6 Transports</li>
+            <li>Agent-Swarms</li>
+          </ul>
+          <div class="agent-foot"><code>latest</code><span>Schwarm</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="route">
+      <div class="route-wrap">
+        <div class="route-copy reveal">
+          <p class="kicker">Smartes Routing</p>
+          <h2>Ein Prompt.<br /><span class="grad">Die richtige Klaue.</span></h2>
+          <p class="section-sub">Wirf eine Aufgabe ein und AnyClaw wählt den Agenten, mountet die Tools und streamt die Arbeit zurück in ein Terminal.</p>
+          <div class="task-list" id="taskList" role="group" aria-label="Beispielaufgaben">
+            <button class="task is-selected" type="button" data-task="landing">
+              <span class="task-idx">01</span>
+              <span>Landingpage ausliefern</span>
+              <span class="task-agent" data-tag="codex">Codex</span>
+            </button>
+            <button class="task" type="button" data-task="audit">
+              <span class="task-idx">02</span>
+              <span>Repo-Architektur auditieren</span>
+              <span class="task-agent" data-tag="claude">Claude</span>
+            </button>
+            <button class="task" type="button" data-task="inbox">
+              <span class="task-idx">03</span>
+              <span>Posteingang zusammenfassen</span>
+              <span class="task-agent" data-tag="openclaw">OpenClaw</span>
+            </button>
+            <button class="task" type="button" data-task="test">
+              <span class="task-idx">04</span>
+              <span>Fehlgeschlagenen Auth-Test beheben</span>
+              <span class="task-agent" data-tag="codex">Codex</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="route-demo reveal delay-1" id="routeDemo">
+          <div class="route-head">
+            <span class="route-title">router.session</span>
+            <button class="btn btn-tiny" id="rerun" type="button"><svg><use href="#i-spark"/></svg> Neu starten</button>
+          </div>
+          <div class="pipeline" aria-hidden="true">
+            <div class="pipe-node" data-node="prompt"><span class="pipe-sym">›_</span><span>Prompt</span></div>
+            <div class="pipe-arrow"></div>
+            <div class="pipe-node" data-node="router"><span class="pipe-sym">⌁</span><span>Router</span></div>
+            <div class="pipe-arrow"></div>
+            <div class="pipe-node pipe-agent" data-node="agent"><span class="pipe-sym">◆</span><span id="pipeAgent">Codex</span></div>
+            <div class="pipe-arrow"></div>
+            <div class="pipe-node" data-node="tools"><span class="pipe-sym">⚙</span><span>Tools</span></div>
+            <div class="pipe-arrow"></div>
+            <div class="pipe-node" data-node="done"><span class="pipe-sym">✓</span><span>Fertig</span></div>
+          </div>
+          <div class="route-log" id="routeLog" role="log" aria-live="polite"></div>
+          <div class="route-foot">
+            <span id="routeMeta">bereit</span>
+            <span class="route-badge">lokal · Sandbox</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="runtime">
+      <div class="section-head reveal">
+        <p class="kicker">Unter der Shell</p>
+        <h2>Eine Linux-Box, <span class="grad">die in die Tasche passt.</span></h2>
+        <p class="section-sub">Nichts ist fake. AnyClaw liefert ein vollständiges Userland, eine Node-Runtime und native Binaries — direkt aus der APK, offline bereit.</p>
+      </div>
+
+      <div class="bento">
+        <article class="bento-card span-2 reveal">
+          <div class="bento-icon"><svg><use href="#i-shield"/></svg></div>
+          <h3>Kein Root. Kein Termux. Keine Kompromisse.</h3>
+          <p>Eine eigenständige Android-App mit eingebetteter Linux-Umgebung. APK installieren — der ganze Stack kommt mit.</p>
+          <div class="bento-visual">
+            <div class="chip-row"><span class="chip">APK</span><span class="chip-arrow">→</span><span class="chip">Linux</span><span class="chip-arrow">→</span><span class="chip">Node 24</span><span class="chip-arrow">→</span><span class="chip accent">Agenten</span></div>
+          </div>
+        </article>
+
+        <article class="bento-card reveal delay-1">
+          <div class="bento-icon"><svg><use href="#i-battery"/></svg></div>
+          <h3>Immer an</h3>
+          <p>Ein Foreground-Service und die Akku-Ausnahme halten lange Agent-Runs am Leben, wenn du die App wechselst.</p>
+        </article>
+
+        <article class="bento-card span-2 reveal">
+          <div class="bento-icon"><svg><use href="#i-layers"/></svg></div>
+          <h3>Kontext, der die Tasche überlebt</h3>
+          <p>Parallele Sessions, jede mit eigenem Thread, Arbeitsverzeichnis und Verlauf. Wechsle Aufgaben, ohne den Faden zu verlieren.</p>
+          <div class="session-strip" aria-hidden="true">
+            <span class="session-pill live"><i></i> landing-page · läuft</span>
+            <span class="session-pill"><i></i> auth-fix · wartet</span>
+            <span class="session-pill"><i></i> inbox · bereit</span>
+          </div>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-icon"><svg><use href="#i-terminal"/></svg></div>
+          <h3>Echtes Terminal</h3>
+          <p><code>sh</code>, <code>apt</code>, Python, Node 24 und CA-Zertifikate. Die Befehle, die du kennst, auf dem Gerät in deiner Hand.</p>
+        </article>
+
+        <article class="bento-card reveal delay-1">
+          <div class="bento-icon"><svg><use href="#i-cpu"/></svg></div>
+          <h3>Natives aarch64</h3>
+          <p>Ein Rust-Core, kompiliert für ARM64 musl. Keine Emulationsschicht, kein Übersetzungs-Overhead.</p>
+        </article>
+
+        <article class="bento-card reveal">
+          <div class="bento-icon"><svg><use href="#i-bolt"/></svg></div>
+          <h3>Offline-Bootstrap</h3>
+          <p>Der Erststart läuft lokal. Laptop zuklappen, ins Flugzeug steigen, weiterbauen.</p>
+        </article>
+
+        <article class="bento-card reveal delay-1">
+          <div class="bento-icon"><svg><use href="#i-key"/></svg></div>
+          <h3>OAuth einmal</h3>
+          <p>Einmal im Browser anmelden. Alle Agenten teilen sich die Session.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container specs-wrap" id="specs">
+      <div class="specs-copy reveal">
+        <p class="kicker">Datenblatt</p>
+        <h2>Was in der Klaue <span class="grad">steckt.</span></h2>
+        <p class="section-sub">Kommt als eine signierte APK. Android 7.0+ auf ARM64, rund 500&nbsp;MB nach dem ersten Entpacken.</p>
+        <a class="text-link" href="https://github.com/OpenClawAndroid/openclaw-android-assistant" target="_blank" rel="noreferrer noopener">Quellcode auf GitHub lesen <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <dl class="specs reveal delay-1">
+        <div><dt>Gateway</dt><dd>OpenClaw <span>2026.9.9</span></dd></div>
+        <div><dt>Agenten</dt><dd>Codex CLI <span>0.104.0</span> · Claude Code</dd></div>
+        <div><dt>Runtime</dt><dd>Node.js <span>24.13.0</span></dd></div>
+        <div><dt>Linux</dt><dd>Termux-Bootstrap <span>aarch64</span></dd></div>
+        <div><dt>Nativ</dt><dd>Rust-Core <span>musl</span></dd></div>
+        <div><dt>Frontend</dt><dd>Vue 3 · Vite · Tailwind <span>+ Kotlin WebView</span></dd></div>
+        <div><dt>Sandbox</dt><dd>workspace-write <span>on-request</span></dd></div>
+        <div><dt>Voraussetzung</dt><dd>Android 7.0+ <span>ARM64</span></dd></div>
+      </dl>
+    </section>
+
+    <section class="section container install" id="install">
+      <div class="install-panel reveal">
+        <div class="install-copy">
+          <p class="kicker">Hol dir AnyClaw</p>
+          <h2>Zwei Wege rein. <span class="grad">Beide sofort.</span></h2>
+          <p class="section-sub">Installiere die Android-App oder öffne das gehostete Terminal und hol dir einen ClawKey.</p>
+          <div class="install-actions">
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant" target="_blank" rel="noreferrer noopener"><svg><use href="#i-play"/></svg> Bei Google Play</a>
+            <a class="btn btn-ghost" href="https://www.anyclaw.sh/" target="_blank" rel="noreferrer noopener"><svg><use href="#i-globe"/></svg> anyclaw.sh <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <p class="install-req"><svg><use href="#i-check"/></svg> Android 7.0+ · ARM64 · ~500 MB · kein Root</p>
+        </div>
+
+        <div class="install-code">
+          <div class="tabs" role="tablist" aria-label="Installationsmethode">
+            <button class="tab is-active" role="tab" id="tab-term" aria-selected="true" aria-controls="panel-term" data-tab="term">Terminal</button>
+            <button class="tab" role="tab" id="tab-android" aria-selected="false" aria-controls="panel-android" data-tab="android">Android</button>
+          </div>
+          <div class="tab-panel" id="panel-term" role="tabpanel" aria-labelledby="tab-term" data-panel="term">
+            <div class="code-block">
+              <div class="code-head"><span>bash</span><button class="copy-btn" type="button" data-copy="curl -sL anyclaw.sh | bash"><svg><use href="#i-copy"/></svg><span>Kopieren</span></button></div>
+              <pre><span class="c-prompt">$</span> curl -sL anyclaw.sh | bash</pre>
+              <pre class="code-out"><span class="c-ok">✓</span> anyclaw v0.1.0 — greife von überall auf deinen lokalen Agenten zu
+<span class="c-dim">web@anyclaw:~$</span> /guest
+<span class="c-key">ck_live_8f2a…c41d</span>  <span class="c-dim">· überall einfügen</span></pre>
+            </div>
+          </div>
+          <div class="tab-panel" id="panel-android" role="tabpanel" aria-labelledby="tab-android" data-panel="android" hidden>
+            <div class="code-block">
+              <div class="code-head"><span>adb · sideload</span><button class="copy-btn" type="button" data-copy="adb install -r anyclaw.apk"><svg><use href="#i-copy"/></svg><span>Kopieren</span></button></div>
+              <pre><span class="c-prompt">$</span> adb install -r anyclaw.apk</pre>
+              <pre class="code-out"><span class="c-ok">✓</span> Erfolg · com.codex.mobile
+<span class="c-dim">$</span> adb shell am start -n com.codex.mobile/.MainActivity</pre>
+            </div>
+          </div>
+          <p class="install-hint"><svg><use href="#i-spark"/></svg> Der erste Start entpackt das Linux-Userland lokal — kein Server nötig.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container faq" id="faq">
+      <div class="section-head reveal">
+        <p class="kicker">Letzte Fragen</p>
+        <h2>Fragen, <span class="grad">beantwortet.</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <details open>
+          <summary>Läuft AnyClaw wirklich lokal?<svg><use href="#i-arrow"/></svg></summary>
+          <p>Ja. Die Agenten, das Linux-Userland und deine Dateien leben auf dem Gerät. Die einzigen Netzwerkaufrufe sind die Modell-API-Calls, die du konfigurierst.</p>
+        </details>
+        <details>
+          <summary>Muss ich mein Handy rooten?<svg><use href="#i-arrow"/></svg></summary>
+          <p>Nein. AnyClaw bringt seine eigene eingebettete Linux-Umgebung in der APK mit und läuft als normale Android-App.</p>
+        </details>
+        <details>
+          <summary>Was kostet es?<svg><use href="#i-arrow"/></svg></summary>
+          <p>Die App ist kostenlos. Du bringst deinen eigenen Modellzugang mit; AnyClaw ist anbieterunabhängig und nicht an einen Hersteller gebunden.</p>
+        </details>
+        <details>
+          <summary>Kann ich es ohne PC nutzen?<svg><use href="#i-arrow"/></svg></summary>
+          <p>Genau dafür ist es gebaut. APK herunterladen, einmal den OAuth-Flow im Browser abschließen und direkt vom Handy aus bauen.</p>
+        </details>
+        <details>
+          <summary>Wie viel Speicher braucht es?<svg><use href="#i-arrow"/></svg></summary>
+          <p>Rund 500&nbsp;MB nach dem ersten Start — inklusive Linux-Umgebung, Node.js und allen drei Agenten.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="cta container reveal">
+      <div class="cta-inner">
+        <span class="cta-mark"><svg><use href="#i-claw"/></svg></span>
+        <h2>Schluss mit Coden am Schreibtisch.<br /><span class="grad">Fang an, überall zu clawen.</span></h2>
+        <p>Drei Agenten, ein Terminal, null Ausreden.</p>
+        <div class="hero-cta center">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant" target="_blank" rel="noreferrer noopener"><svg><use href="#i-play"/></svg> AnyClaw herunterladen</a>
+          <button class="btn btn-ghost" id="tryTerminal2" type="button"><svg><use href="#i-terminal"/></svg> Terminal öffnen</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="AnyClaw Startseite">
+          <span class="brand-mark"><svg><use href="#i-claw"/></svg></span>
+          <span class="brand-name">AnyClaw</span>
+        </a>
+        <p>Greife von überall auf deinen lokalen Agenten zu.</p>
+        <div class="footer-links">
+          <a href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant" target="_blank" rel="noreferrer noopener">Google Play</a>
+          <a href="https://www.anyclaw.sh/" target="_blank" rel="noreferrer noopener">anyclaw.sh</a>
+          <a href="https://github.com/OpenClawAndroid/openclaw-android-assistant" target="_blank" rel="noreferrer noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <p>Baut auf Open Source: OpenClaw (MIT), Codex CLI (Apache-2.0), OpenCode (MIT).</p>
+        <p>&copy; <span id="year">2026</span> AnyClaw. Lade dein Handy auf.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
