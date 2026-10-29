@@ -1,3 +1,16 @@
+# AnyClaw — The Everything Machine
+
+A neon arcade claw machine you can actually play, built with Three.js and zero external runtime assets.
+
+**Grab anything.** Plushies, snacks, space junk, and a few legendary treasures are piled inside a glass cabinet. Aim the claw with `WASD` / arrow keys (or drag on touch), drop with `Space` (or the on-screen button), and carry your prize to the glowing chute before the 60-second clock runs out.
+
+- 12 hand-built prize types across common, rare, and legendary tiers
+- 60-second runs, score chasing, and a saved personal best
+- Responsive desktop and mobile layouts with touch aiming
+- Synthesized arcade sound effects and a live 3D claw-cabinet diorama
+
+Run the project with `./start.sh` (static HTML, no build step).
+
 # PlayGround
 
 <!-- omgithub:readme:start -->

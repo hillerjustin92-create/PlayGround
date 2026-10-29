@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#05060f" />
+  <meta name="description" content="AnyClaw — the everything machine. Aim the claw, grab something wonderful, and beat the clock." />
+  <title>AnyClaw — The Everything Machine</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090b1a'/%3E%3Cpath d='M32 12v16M32 28l-11 9m11-9 11 9M21 37l-3 8m25-8 3 8' stroke='%235ff6ff' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preload" href="assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/spacegrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="scene" aria-label="AnyClaw 3D claw machine"></canvas>
+
+  <div class="fx fx-grid" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-scan" aria-hidden="true"></div>
+  <div class="fx fx-noise" aria-hidden="true"></div>
+
+  <header id="hud" class="hud is-hidden">
+    <div class="brand brand--small">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-word">ANY<b>CLAW</b></span>
+    </div>
+    <div class="hud-stats">
+      <div class="stat" id="stat-time">
+        <span class="stat-label">Time</span>
+        <strong id="time">60</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Score</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="stat stat--best">
+        <span class="stat-label">Best</span>
+        <strong id="best">0</strong>
+      </div>
+      <button id="mute" class="icon-btn" type="button" aria-label="Mute sound" title="Mute sound">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path id="mute-wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <aside id="tray" class="tray is-hidden" aria-live="polite">
+    <div class="tray-head">
+      <span class="tray-title">Loot</span>
+      <span id="tray-count" class="tray-count">0</span>
+    </div>
+    <div id="tray-items" class="tray-items">
+      <p class="tray-empty">Nothing clawed yet.</p>
+    </div>
+  </aside>
+
+  <div id="hint" class="hint is-hidden" aria-live="polite">
+    <span class="hint-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+    <span>move claw</span>
+    <span class="hint-sep"></span>
+    <span class="hint-keys"><kbd>Space</kbd></span>
+    <span>drop / release</span>
+  </div>
+
+  <div id="drop-wrap" class="drop-wrap is-hidden">
+    <button id="drop" class="drop-btn" type="button" aria-label="Drop claw">
+      <span class="drop-ring"></span>
+      <span class="drop-label">DROP</span>
+    </button>
+  </div>
+
+  <div id="floaters" class="floaters" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <section id="start" class="overlay overlay--start">
+    <div class="start-card">
+      <div class="kicker"><span></span>The Everything Machine<span></span></div>
+      <h1 class="logo-lockup">ANY<span>CLAW</span></h1>
+      <p class="tagline">Plushies. Snacks. Space junk.<br />If it fits, it's a prize.</p>
+      <div class="chips">
+        <span>12 prize types</span>
+        <span>60 second run</span>
+        <span>One claw</span>
+      </div>
+      <button id="play" class="play-btn" type="button" aria-label="Play">
+        <span class="play-icon" aria-hidden="true">&#9654;</span>
+        <span>Insert coin</span>
+      </button>
+      <div class="start-controls">
+        <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><em>Move</em></div>
+        <div><kbd>Space</kbd><em>Drop &amp; release</em></div>
+        <div class="start-controls-touch"><span class="tap-dot"></span><em>Drag to aim</em></div>
+      </div>
+    </div>
+    <div class="start-foot">EVERYTHING IS GRABBABLE</div>
+  </section>
+
+  <section id="result" class="overlay overlay--result is-hidden">
+    <div class="result-card">
+      <div class="kicker"><span></span>Run complete<span></span></div>
+      <h2 id="result-title">TIME'S UP</h2>
+      <div class="result-score">
+        <span>Score</span>
+        <strong id="result-score">0</strong>
+      </div>
+      <p id="result-copy" class="result-copy">The claw has spoken.</p>
+      <div id="result-items" class="tray-items tray-items--result"></div>
+      <button id="replay" class="play-btn" type="button" aria-label="Start again">
+        <span class="play-icon" aria-hidden="true">&#8635;</span>
+        <span>One more go</span>
+      </button>
+      <div class="result-best">Personal best <b id="result-best">0</b></div>
+    </div>
+  </section>
+
+  <div id="loading" class="loading" role="status">
+    <div class="loading-claw" aria-hidden="true"><i></i><i></i><i></i></div>
+    <span>Warming up the claw</span>
+  </div>
+
+  <noscript>
+    <div class="noscript">AnyClaw needs JavaScript enabled to run this claw machine.</div>
+  </noscript>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
