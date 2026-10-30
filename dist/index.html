@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07090d" />
+    <meta
+      name="description"
+      content="AnyClaw Grok-Bot – der ungefilterte OpenCode Live-Build-Assistent von hillerjustin92-create."
+    />
+    <title>AnyClaw // GROK-BOT ONLINE</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="bot-avatar" aria-hidden="true">🤖</span>
+          <div class="brand-copy">
+            <p class="eyebrow">OmGithub.com // ANYCLAW</p>
+            <h1>GROK-BOT <span class="online">ONLINE</span></h1>
+          </div>
+        </div>
+        <div class="status" aria-label="Systemstatus">
+          <span class="pill"><span class="dot"></span> User: hillerjustin92-create</span>
+          <span class="pill"><span class="dot"></span> Engine: OpenCode Live-Build</span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="sidebar" aria-label="Systembefehle">
+          <div class="sidebar-head">
+            <h2>System-Befehle</h2>
+            <span class="badge">4 AKTIV</span>
+          </div>
+          <div class="commands">
+            <button class="command" type="button" data-command="/build Warcraft 3D">
+              <span class="command-key">▶ /build</span>
+              <span class="command-arg">[Projekt]</span>
+              <small>Startet den simulierten OpenCode Live-Build.</small>
+            </button>
+            <button class="command" type="button" data-command="/anyclaw HUD">
+              <span class="command-key">▶ /anyclaw</span>
+              <span class="command-arg">[Feature]</span>
+              <small>Entwickelt ein spezifisches Modul für dein AnyClaw-Projekt.</small>
+            </button>
+            <button class="command" type="button" data-command="/warcraft3d">
+              <span class="command-key">▶ /warcraft3d</span>
+              <span class="command-arg">[]</span>
+              <small>Startet das experimentelle 3D-Game-Setup.</small>
+            </button>
+            <button class="command" type="button" data-command="/sarkasmus Warum ist mein Build rot?">
+              <span class="command-key">▶ /sarkasmus</span>
+              <span class="command-arg">[Frage]</span>
+              <small>Aktiviert die maximale Dosis ungefilterten Grok-Humor.</small>
+            </button>
+          </div>
+
+          <div class="sidebar-note">
+            <span class="note-label">LIVE-BUILD</span>
+            <p>Dieses Interface ist eine Simulation. Echte Commits macht die OpenCode-Engine, nicht der Bot mit dem großen Mund.</p>
+          </div>
+        </aside>
+
+        <section class="chat-panel" aria-label="Chat mit dem Grok-Bot">
+          <div class="chat-head">
+            <div class="chat-title">
+              <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>anyclaw://grok-bot</span>
+            </div>
+            <span class="chat-state"><span class="dot"></span> verbunden</span>
+          </div>
+
+          <div id="chat" class="chat" role="log" aria-live="polite" aria-label="Chatverlauf"></div>
+
+          <form id="composer" class="composer" autocomplete="off">
+            <label class="sr-only" for="command-input">Befehl eingeben</label>
+            <span class="prompt" aria-hidden="true">›</span>
+            <input
+              id="command-input"
+              name="command"
+              type="text"
+              placeholder="Befehl eingeben … z. B. /build AnyClaw"
+              maxlength="240"
+              spellcheck="false"
+            />
+            <button class="send" type="submit">SENDEN</button>
+          </form>
+          <p class="hint">Tipp: <code>/build [Projekt]</code>, <code>/anyclaw [Feature]</code>, <code>/warcraft3d</code> oder <code>/sarkasmus [Frage]</code></p>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>AnyClaw Runtime v0.3.7</span>
+        <span class="footer-right"><span class="dot"></span> Smartphone-Modus: ja, leider</span>
+      </footer>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
